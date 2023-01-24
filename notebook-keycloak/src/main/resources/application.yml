@@ -1,0 +1,15 @@
+server:
+  port: 8180
+
+keycloak-config:
+  realm: master
+  resource: admin-cli
+  url: http://localhost:8080
+  username: admin
+  password: admin
+  targetClientId: APP
+  targetClientRedirectUrl: http://localhost:8180
+  targetClientSecret: V9X4gQO5QctDKvsstPLnUlPj69enZhWb
+  targetRealm: ID3
+
+

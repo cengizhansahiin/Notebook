@@ -1,0 +1,24 @@
+server:
+  port: 8280
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/id3-notebook
+    username: postgres
+    password: admin
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+
+keycloak:
+  auth-server-url: http://localhost:8080
+  realm: ID3
+  ssl-required: external
+  resource: APP
+  credentials:
+    secret: V9X4gQO5QctDKvsstPLnUlPj69enZhWb
+  bearer-only: true
