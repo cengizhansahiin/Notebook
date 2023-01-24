@@ -1,34 +1,4 @@
-﻿
-
-
-
-
-
-
-SOFTWARE PROJECT
-
-ANALYSIS REPORT
-
-FOR
-
-THE NOTEBOOK
-
-PROJECT
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+﻿#README.md file of the Notebook project
 
 # Contents
 [**1.**	**Introduction**	3](#_Toc124013745)
@@ -135,13 +105,15 @@ General user is referring to guest user. Guest/General user have limitations rat
 
 1. ## **Use-case diagram**
 
-
+![alt text](https://github.com/cengizhansahiin/Notebook/blob/master/diagrams/usecase.png?raw=true)
 
 
 
 1. # **Architectures**
 
 1. ## **Microservice Architecture**
+
+![alt text](https://github.com/cengizhansahiin/Notebook/blob/master/diagrams/component.png?raw=true)
 
 
 
