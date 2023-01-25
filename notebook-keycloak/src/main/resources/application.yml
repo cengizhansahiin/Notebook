@@ -9,7 +9,6 @@ keycloak-config:
   password: admin
   targetClientId: APP
   targetClientRedirectUrl: http://localhost:8180
-  targetClientSecret: V9X4gQO5QctDKvsstPLnUlPj69enZhWb
   targetRealm: ID3
 
 

@@ -2,6 +2,7 @@ package com.id3.notebookkeycloak.service.keycloak;
 
 import com.id3.notebookkeycloak.constants.KeycloakConstants;
 import com.id3.notebookkeycloak.service.keycloak.model.KeycloakRedirectUris;
+import lombok.extern.slf4j.Slf4j;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.representations.idm.ClientRepresentation;
 import org.keycloak.representations.idm.RealmRepresentation;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class KeycloakSetupService {
     @Autowired
     KeycloakConstants keycloakConstants;
@@ -27,9 +29,15 @@ public class KeycloakSetupService {
 
         boolean realmExist = ifRealmExist(realmName);
         if(!realmExist) createRealm(realmName,clientId);
-
+        setClientSecret();
     }
-
+    private void setClientSecret() {
+        keycloakConstants.targetClientSecret = keycloak.realm(keycloakConstants.targetRealm)
+                .clients()
+                .findByClientId(keycloakConstants.targetClientId)
+                .get(0)
+                .getSecret();
+    }
     private void createRealm(String realmName, String clientId) {
         RealmRepresentation realmRepresentation = new RealmRepresentation();
         realmRepresentation.setRealm(realmName);
