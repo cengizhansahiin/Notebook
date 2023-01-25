@@ -64,8 +64,8 @@ public class KeycloakManagementService {
 
     public UserDTO getUser(String id) {
         Keycloak keycloak = keycloakInstanceService.getInstance();
-        UserResource userResource = keycloak.realm(keycloakConstants.targetRealm).users().get(id);
-        UserDTO userDTO = KeycloakObjectMapper.UserResourceToUserDTO(userResource);
+        UserRepresentation userRepresentation = keycloak.realm(keycloakConstants.targetRealm).users().get(id).toRepresentation();
+        UserDTO userDTO = KeycloakObjectMapper.UserRepresentationToUserDTO(userRepresentation);
         return userDTO;
     }
     public Response deleteUser(String id) {
@@ -92,5 +92,12 @@ public class KeycloakManagementService {
         HttpEntity<MultiValueMap<String,String>> httpEntity = new HttpEntity<>(entity,headers);
         String response = restTemplate.postForObject(url,httpEntity, String.class);
         return TokenMapper.StringToTokenDTO(response);
+    }
+
+    public List<UserIdDTO> allUsers() {
+        return KeycloakObjectMapper.UserRepresentationListToUserIdDTOList(keycloak
+                .realm(keycloakConstants.targetRealm)
+                .users()
+                .list());
     }
 }

@@ -7,10 +7,12 @@ import com.id3.notebookkeycloak.service.keycloak.model.TokenDTO;
 import com.id3.notebookkeycloak.service.keycloak.model.UserIdDTO;
 import com.id3.notebookkeycloak.service.keycloak.model.UserDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -44,5 +46,10 @@ public class KeycloakManagementController {
     @PostMapping("/login")
     public TokenDTO login(@RequestBody LoginDTO loginDTO) throws JsonProcessingException {
         return keycloakManagementService.login(loginDTO);
+    }
+    @GetMapping("/all")
+    public List<UserIdDTO> allUsers(){
+        List<UserIdDTO> users = keycloakManagementService.allUsers();
+        return users;
     }
 }

@@ -1,6 +1,7 @@
 package com.id3.notebookkeycloak.service.keycloak.mapper;
 
 import com.id3.notebookkeycloak.service.keycloak.model.UserDTO;
+import com.id3.notebookkeycloak.service.keycloak.model.UserIdDTO;
 import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
@@ -11,12 +12,12 @@ import java.util.List;
 
 public class KeycloakObjectMapper {
 
-    public static UserDTO UserResourceToUserDTO(UserResource userResource){
+    public static UserDTO UserRepresentationToUserDTO(UserRepresentation userRepresentation){
         UserDTO userDTO = new UserDTO();
-        userDTO.setEmail(userResource.toRepresentation().getEmail());
-        userDTO.setFirstname(userResource.toRepresentation().getFirstName());
-        userDTO.setLastname(userResource.toRepresentation().getLastName());
-        userDTO.setUsername(userResource.toRepresentation().getUsername());
+        userDTO.setEmail(userRepresentation.getEmail());
+        userDTO.setFirstname(userRepresentation.getFirstName());
+        userDTO.setLastname(userRepresentation.getLastName());
+        userDTO.setUsername(userRepresentation.getUsername());
         userDTO.setPassword("");
         return userDTO;
     }
@@ -37,5 +38,16 @@ public class KeycloakObjectMapper {
         passwordCredentials.setType(CredentialRepresentation.PASSWORD);
         passwordCredentials.setValue(password);
         return passwordCredentials;
+    }
+    public static List<UserIdDTO> UserRepresentationListToUserIdDTOList(List<UserRepresentation> users){
+        List<UserIdDTO> usersDTO = new ArrayList<>();
+        for(UserRepresentation u: users){
+            UserDTO userDTO = UserRepresentationToUserDTO(u);
+            UserIdDTO userIdDTO = new UserIdDTO();
+            userIdDTO.setUserDTO(userDTO);
+            userIdDTO.setId(u.getId());
+            usersDTO.add(userIdDTO);
+        }
+        return usersDTO;
     }
 }
