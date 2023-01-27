@@ -1,0 +1,14 @@
+server:
+  port: 8380
+
+keycloak-module:
+  api: http://localhost:8180/api/user/all
+
+crud-module:
+  api: http://localhost:8180/api/user/all
+
+spring:
+  quartz:
+    job-store-type: memory
+  main:
+    allow-bean-definition-overriding: true
