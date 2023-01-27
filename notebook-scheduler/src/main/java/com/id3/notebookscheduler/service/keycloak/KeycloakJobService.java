@@ -16,11 +16,9 @@ public class KeycloakJobService {
     String apiUrl;
 
     public List<UserIdDTO> getKeycloakUsers(){
-        log.info("Keycloak Job");
-        return null;
-        /*RestTemplate restTemplate = new RestTemplate();
+        RestTemplate restTemplate = new RestTemplate();
         List<UserIdDTO> userList = restTemplate.getForObject(apiUrl, ArrayList.class);
-        return userList;*/
+        return userList;
     }
 
 }
