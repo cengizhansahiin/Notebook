@@ -51,4 +51,9 @@ public class CrudService {
         notebook.setNotebookId(id);
         notebookCrudRepository.save(notebook);
     }
+
+    public List<NotebookDTO> getScheduledNotebooks() {
+        List<NotebookDTO> notebooks = NotebookMapper.EntityListToDTOList(notebookCrudRepository.findByScheduled());
+        return notebooks;
+    }
 }

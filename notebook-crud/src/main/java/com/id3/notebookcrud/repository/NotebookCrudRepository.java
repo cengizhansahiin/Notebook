@@ -14,4 +14,6 @@ public interface NotebookCrudRepository extends JpaRepository<Notebook, Integer>
 
     @Query(value = "SELECT * FROM notebook WHERE keycloakId = :keycloakId and notebookContent LIKE %:text%", nativeQuery = true)
     List<Notebook> findByText(@Param("text") String text, @Param("keycloakId") String keycloakId);
+    @Query(value = "SELECT * FROM notebook WHERE scheduled = true", nativeQuery = true)
+    List<Notebook> findByScheduled();
 }
