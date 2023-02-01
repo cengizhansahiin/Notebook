@@ -1,7 +1,8 @@
-package com.id3.notebookscheduler.notebookscheduler;
+package com.id3.notebookscheduler;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 public class NotebookSchedulerApplication {
