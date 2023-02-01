@@ -1,7 +1,7 @@
-package com.id3.notebookprofile.notebookprofile.service.crud.mapper;
+package com.id3.notebookprofile.notebookprofile.service.profile.mapper;
 
-import com.id3.notebookprofile.notebookprofile.service.crud.model.Profile;
-import com.id3.notebookprofile.notebookprofile.service.crud.model.ProfileDTO;
+import com.id3.notebookprofile.notebookprofile.service.profile.model.Profile;
+import com.id3.notebookprofile.notebookprofile.service.profile.model.ProfileDTO;
 
 import java.util.ArrayList;
 import java.util.List;

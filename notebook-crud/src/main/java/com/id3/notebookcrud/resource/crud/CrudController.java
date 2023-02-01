@@ -52,4 +52,6 @@ public class CrudController {
     public void updateNotebook(@RequestBody NotebookDTO notebookDTO, @PathVariable int id){
         crudService.updateNotebook(notebookDTO,id);
     }
+
+
 }
