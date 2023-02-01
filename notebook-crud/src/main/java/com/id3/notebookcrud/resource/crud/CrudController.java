@@ -52,9 +52,6 @@ public class CrudController {
     public void updateNotebook(@RequestBody NotebookDTO notebookDTO, @PathVariable int id){
         crudService.updateNotebook(notebookDTO,id);
     }
-    @GetMapping("/scheduled")
-    public List<NotebookDTO> getScheduledNotebooks(){
-        List<NotebookDTO> notebooks = crudService.getScheduledNotebooks();
-        return notebooks;
-    }
+
+
 }

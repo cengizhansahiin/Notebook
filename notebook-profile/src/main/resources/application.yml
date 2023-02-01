@@ -20,5 +20,5 @@ keycloak:
   ssl-required: external
   resource: APP
   credentials:
-    secret: V9X4gQO5QctDKvsstPLnUlPj69enZhWb
+    secret: rDJypDYBE4MUuzm0izQoAQEg09IAjhHc
   bearer-only: true

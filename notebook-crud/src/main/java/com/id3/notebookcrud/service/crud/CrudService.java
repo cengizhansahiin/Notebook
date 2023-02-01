@@ -20,6 +20,7 @@ public class CrudService {
 
     @Autowired
     NotebookCrudRepository notebookCrudRepository;
+
     public List<NotebookDTO> getAllNotebooks(String id) {
         List<NotebookDTO> list = NotebookMapper.EntityListToDTOList(notebookCrudRepository.findByKeycloakId(id));
         return list;
