@@ -1,11 +1,11 @@
 server:
-  port: 8280
+  port: 8480
 
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/id3-notebook
     username: postgres
-    password:
+    password: dbpare244
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
@@ -13,6 +13,8 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+  kafka:
+    bootstrap-servers: localhost:9092
 
 keycloak:
   auth-server-url: http://localhost:8080
@@ -22,3 +24,4 @@ keycloak:
   credentials:
     secret: rDJypDYBE4MUuzm0izQoAQEg09IAjhHc
   bearer-only: true
+  use-resource-role-mappings: false
