@@ -55,4 +55,29 @@ public class ProfileService {
         profile.setPassword(profileDTO.getPassword());
         profileCrudRepository.save(profile);
     }
+
+    public ProfileDTO findProfileByKeycloakId(String id) {
+        return ProfileMapper.fromDomain(profileCrudRepository.findByKeycloakId(id));
+    }
+
+    public void updateProfileByKeycloakId(String id, ProfileDTO profileDTO) {
+        Profile profile = profileCrudRepository.findByKeycloakId(id);
+        profile.setUsername(profileDTO.getUsername());
+        profile.setEmail(profileDTO.getEmail());
+        profile.setFirstname(profileDTO.getFirstname());
+        profile.setLastname(profileDTO.getLastname());
+        profile.setPassword(profileDTO.getPassword());
+        profileCrudRepository.save(profile);
+    }
+
+    public ResponseEntity<String> deleteProfileByKeycloakId(String id) {
+        Profile profile = profileCrudRepository.findByKeycloakId(id);
+        if(profile != null) {
+            profileCrudRepository.delete(profile);
+            return new ResponseEntity<>("Profile deleted.", HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>("Profile not found.", HttpStatus.NOT_FOUND);
+        }
+    }
 }

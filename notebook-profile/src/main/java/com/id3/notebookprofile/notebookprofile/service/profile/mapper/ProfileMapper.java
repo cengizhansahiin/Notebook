@@ -9,25 +9,33 @@ import java.util.List;
 public class ProfileMapper {
 
     public static Profile toDomain(ProfileDTO profileDTO){
-        Profile profile = new Profile();
-        profile.setKeycloakId(profileDTO.getKeycloakId());
-        profile.setUsername(profileDTO.getUsername());
-        profile.setEmail(profileDTO.getEmail());
-        profile.setFirstname(profileDTO.getFirstname());
-        profile.setLastname(profileDTO.getLastname());
-        profile.setPassword(profileDTO.getPassword());
-        return profile;
+        if(profileDTO != null) {
+            Profile profile = new Profile();
+            profile.setKeycloakId(profileDTO.getKeycloakId());
+            profile.setUsername(profileDTO.getUsername());
+            profile.setEmail(profileDTO.getEmail());
+            profile.setFirstname(profileDTO.getFirstname());
+            profile.setLastname(profileDTO.getLastname());
+            profile.setPassword(profileDTO.getPassword());
+            return profile;
+        }
+        else
+            return null;
     }
 
     public static ProfileDTO fromDomain(Profile profile){
-        ProfileDTO profileDTO = new ProfileDTO();
-        profileDTO.setKeycloakId(profile.getKeycloakId());
-        profileDTO.setUsername(profile.getUsername());
-        profileDTO.setEmail(profile.getEmail());
-        profileDTO.setFirstname(profile.getFirstname());
-        profileDTO.setLastname(profile.getLastname());
-        profileDTO.setPassword(profile.getPassword());
-        return profileDTO;
+        if(profile != null) {
+            ProfileDTO profileDTO = new ProfileDTO();
+            profileDTO.setKeycloakId(profile.getKeycloakId());
+            profileDTO.setUsername(profile.getUsername());
+            profileDTO.setEmail(profile.getEmail());
+            profileDTO.setFirstname(profile.getFirstname());
+            profileDTO.setLastname(profile.getLastname());
+            profileDTO.setPassword(profile.getPassword());
+            return profileDTO;
+        }
+        else
+            return null;
     }
 
     public static List<ProfileDTO> fromDomain(List<Profile> profileList){
