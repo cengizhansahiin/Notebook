@@ -17,26 +17,37 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ProfileKafkaListenerService {
 
-    @Autowired
     ProfileService profileService;
+    List<ProfileDTO> profileDTOList;
+    List<String> keycloakIdList;
+    List<String> keycloakIdList1;
+    int numOfProfiles;
+    int count;
 
-    List<ProfileDTO> profileDTOList = profileService.findAllProfiles();
-    List<String> keycloakIdList = profileDTOList.stream().map(ProfileDTO::getKeycloakId).collect(Collectors.toList());
-    List<String> keycloakIdList1 = new ArrayList<String>();
-    int numOfProfiles = profileDTOList.size();
-
-    int count = 0;
+    @Autowired
+    public ProfileKafkaListenerService(ProfileService profileService) {
+        this.profileService = profileService;
+        this.profileDTOList = profileService.findAllProfiles();
+        this.keycloakIdList = profileDTOList.stream().map(ProfileDTO::getKeycloakId).collect(Collectors.toList());
+        this.keycloakIdList1 = new ArrayList<String>();
+        this.numOfProfiles = profileDTOList.size();
+        this.count = 0;
+    }
 
     @KafkaListener(topics = "sync", groupId="group-1", containerFactory="userKafkaListenerContainerFactory")
     void listener(UserIdDTO userIdDTO) {
-        //keycloakIdList.add(userIdDTO.getId());
         log.info("KeycloakUser [{}]", userIdDTO);
+        String id = userIdDTO.getId();
+        if(!(keycloakIdList1.contains(id))) {
+            keycloakIdList1.add(id);
+        }
         ProfileDTO profileDTO = profileService.findProfileByKeycloakId(userIdDTO.getId());
         UserDTO userDTO = userIdDTO.getUserDTO();
         if(profileDTO == null) {
             profileDTO = new ProfileDTO(userIdDTO.getId(), userDTO.getUsername(), userDTO.getEmail(),
                     userDTO.getFirstname(), userDTO.getLastname(), userDTO.getPassword());
             profileService.saveProfile(profileDTO);
+            numOfProfiles++;
         }
         else {
             ProfileDTO profileDTO1 = new ProfileDTO(userIdDTO.getId(), userDTO.getUsername(),
@@ -45,15 +56,18 @@ public class ProfileKafkaListenerService {
                 profileService.updateProfileByKeycloakId(profileDTO.getKeycloakId(), profileDTO1);
             }
         }
-        if(count++ == numOfProfiles) {
-            for(String id : keycloakIdList) {
-                if(!(keycloakIdList1.contains(id))) {
-                    profileService.deleteProfileByKeycloakId(id);
+        count++;
+        if(count == numOfProfiles) {
+            for(String s : keycloakIdList) {
+                if(!(keycloakIdList1.contains(s))) {
+                    profileService.deleteProfileByKeycloakId(s);
                 }
             }
-            count = 0;
             profileDTOList = profileService.findAllProfiles();
+            keycloakIdList = profileDTOList.stream().map(ProfileDTO::getKeycloakId).collect(Collectors.toList());
+            keycloakIdList1.clear();
             numOfProfiles = profileDTOList.size();
+            count = 0;
         }
     }
 }
