@@ -6,12 +6,20 @@ import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.concurrent.ExecutionException;
+
 public class ScheduledNotebookJob implements Job {
 
     @Autowired
     private ScheduledNotebookService scheduledNotebookService;
     @Override
-    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        scheduledNotebookService.alert();
+    public void execute(JobExecutionContext jobExecutionContext) {
+        try {
+            scheduledNotebookService.alert(jobExecutionContext);
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
