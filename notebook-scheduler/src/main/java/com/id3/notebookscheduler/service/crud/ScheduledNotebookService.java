@@ -12,8 +12,6 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 @Service

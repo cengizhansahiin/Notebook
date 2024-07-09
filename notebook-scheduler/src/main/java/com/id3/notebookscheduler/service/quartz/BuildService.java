@@ -42,14 +42,14 @@ public class BuildService {
     public void scheduleJob(JobInformation jobInformation, TriggerInformation triggerInformation) throws SchedulerException {
         JobDetail job = createJob(jobInformation);
         CronTrigger trigger = createTrigger(triggerInformation,job);
-        if(!isExist(jobInformation.getId())){
+        if(!doesExist(jobInformation.getId())){
             schedulerFactoryBean.getObject().scheduleJob(job,trigger);
         }
         else{
             log.error("Job already exists!!!");
         }
     }
-    public boolean isExist(String id) throws SchedulerException {
+    public boolean doesExist(String id) throws SchedulerException {
         for(JobKey key: schedulerFactoryBean.getObject().getJobKeys(GroupMatcher.jobGroupEquals("group 3"))){
             if(key.getName().equals(id)) return true;
         }

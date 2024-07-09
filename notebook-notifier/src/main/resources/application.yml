@@ -1,0 +1,10 @@
+server:
+  port: 8580
+
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+
+gcp:
+  firebase:
+    service-account: classpath:firebase-service-account.json
