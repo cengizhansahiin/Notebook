@@ -5,8 +5,8 @@ keycloak-config:
   realm: master
   resource: admin-cli
   url: http://localhost:8080
-  username: admin
-  password: key2424
+  username:
+  password:
   targetClientId: APP
   targetClientRedirectUrl: http://localhost:8180
   targetRealm: ID3
