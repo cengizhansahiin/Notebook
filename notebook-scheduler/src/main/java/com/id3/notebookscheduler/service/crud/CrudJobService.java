@@ -37,7 +37,6 @@ public class CrudJobService {
         List<Map<JobInformation,TriggerInformation>> jobs = CrudMapper.NotebookDTOtoQuartzInformation(list);
         for(Map<JobInformation, TriggerInformation> i: jobs){
             JobInformation job = (JobInformation) i.keySet().toArray()[0];
-            // i can change the scheduleJob method to not check keycloakid's existence
             TriggerInformation trigger = (TriggerInformation) i.values().toArray()[0];
             buildService.scheduleJob(job,trigger);
         }

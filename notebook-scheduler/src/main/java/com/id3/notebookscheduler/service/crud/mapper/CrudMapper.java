@@ -26,12 +26,14 @@ public class CrudMapper {
     }
     public static JobInformation NotebookDTOtoJobInformation(NotebookDTO notebookDTO){
         JobInformation jobInformation = new JobInformation();
-        jobInformation.setId(notebookDTO.getKeycloakId());
+        // here I use the keycloak id, the content, and the creation time of notebook as the id of the job
+        jobInformation.setId(notebookDTO.getKeycloakId() + "-" + notebookDTO.getNotebookContent() + "-" + notebookDTO.getCreatedOn());
         return jobInformation;
     }
     public static TriggerInformation NotebookDTOtoTriggerInformation(NotebookDTO notebookDTO){
         TriggerInformation triggerInformation = new TriggerInformation();
-        triggerInformation.setId(notebookDTO.getKeycloakId());
+        // here I use the keycloak id, the content, and the creation time of notebook as the id of the job
+        triggerInformation.setId(notebookDTO.getKeycloakId() + "-" + notebookDTO.getNotebookContent() + "-" + notebookDTO.getCreatedOn());
         triggerInformation.setCron(notebookDTO.getScheduleCron());
         return triggerInformation;
     }

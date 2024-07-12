@@ -22,6 +22,7 @@ public class NotebookMapper {
         NotebookDTO notebookDTO = new NotebookDTO();
         notebookDTO.setKeycloakId(notebook.getKeycloakId());
         notebookDTO.setNotebookContent(notebook.getNotebookContent());
+        notebookDTO.setCreatedOn(notebook.getCreatedOn().toString());
         notebookDTO.setScheduled(notebook.isScheduled());
         notebookDTO.setScheduleCron(notebook.getScheduleCron());
         return notebookDTO;

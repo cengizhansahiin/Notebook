@@ -29,9 +29,9 @@ public class NotifierMessagingService {
 
     @KafkaListener(topics = "notify", groupId="group-1", containerFactory="userKafkaListenerContainerFactory")
     void listener(String id){
-        log.info("KeycloakUser [{}]", id);
+        log.info("Notebook info: [{}]", id);
         keyCloakIdList.add(id);
-        // id ve token ile mesaj oluştur
+        // custom id ve token ile mesaj oluştur
         // oluşan mesajı yolla
     }
 
